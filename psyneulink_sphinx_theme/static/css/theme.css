@@ -9450,6 +9450,11 @@ a:visited.has-code span {
   color: #4974D1;
 }
 
+article > section > section {
+  padding-top: 45px;
+  margin-top: -45px;
+}
+
 article.psyneulink-article ul,
 article.psyneulink-article ol {
   padding-left: 1.875rem;
