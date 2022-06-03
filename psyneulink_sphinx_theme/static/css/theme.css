@@ -9450,11 +9450,6 @@ a:visited.has-code span {
   color: #4974D1;
 }
 
-article > section > section {
-  padding-top: 45px;
-  margin-top: -45px;
-}
-
 article.psyneulink-article ul,
 article.psyneulink-article ol {
   padding-left: 1.875rem;
@@ -9533,6 +9528,10 @@ article.psyneulink-article .sphx-glr-thumbcontainer {
     margin-right: 3%;
     margin-bottom: 3%;
     width: 30%;
+  }
+  section {
+    padding-top: 45px;
+    margin-top: -45px;
   }
 }
 article.psyneulink-article .sphx-glr-thumbcontainer .caption-text a {
@@ -11265,4 +11264,11 @@ input:checked + .slider:before {
 
 #psyneulink-side-scroll-right {
   overflow: hidden;
+}
+
+@media screen and (min-width: 1101px) {
+  section {
+    padding-top: 45px;
+    margin-top: -45px;
+  }
 }
