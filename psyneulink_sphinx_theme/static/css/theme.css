@@ -11262,7 +11262,7 @@ input:checked + .slider:before {
 }
 
 @media screen and (min-width: 1101px) {
-  section, section > span {
+  section {
     padding-top: 45px;
     margin-top: -45px;
   }
