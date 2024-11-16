@@ -9174,7 +9174,6 @@ pre {
 
 article.psyneulink-article {
   max-width: 920px;
-  margin: 0 auto;
 }
 article.psyneulink-article h2,
 article.psyneulink-article h3,
@@ -9417,7 +9416,7 @@ h1 {
   letter-spacing: 1.78px;
   line-height: 2.5rem;
   text-transform: uppercase;
-  margin: 2rem 0;
+  margin: 20px 0;
 }
 
 span.pre {
@@ -10358,9 +10357,6 @@ a:hover {
     margin-left: 30px;
   }
 }
-.psyneulink-content-left .main-content {
-  padding-top: 0.9375rem;
-}
 /*.psyneulink-content-left .main-content ul.simple {*/
 /*  padding-bottom: 1.25rem;*/
 /*}*/
@@ -10886,7 +10882,7 @@ a:hover {
     height: 45px;
     padding-left: 0;
     width: 100%;
-    position: absolute;
+    position: sticky;
     z-index: 1;
   }
   .psyneulink-page-level-bar.left-menu-is-fixed {
