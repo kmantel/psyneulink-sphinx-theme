@@ -11260,10 +11260,3 @@ input:checked + .slider:before {
 #psyneulink-side-scroll-right {
   overflow: hidden;
 }
-
-@media screen and (min-width: 1101px) {
-  section {
-    padding-top: 45px;
-    margin-top: -45px;
-  }
-}
