@@ -818,7 +818,7 @@ function ThemeNav () {
                 adjust_hashes(h, -(utilities.headersHeight() + utilities.OFFSET_HEIGHT_PADDING))
             });
 
-        document.querySelectorAll('.psyneulink-container .section').forEach(
+        document.querySelectorAll('.psyneulink-container section').forEach(
             (h) => {
                 adjust_hashes(h, -(utilities.headersHeight()))
             });
