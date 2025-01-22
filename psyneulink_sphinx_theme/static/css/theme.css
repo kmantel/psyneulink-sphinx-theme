@@ -9179,6 +9179,7 @@ article.psyneulink-article {
   max-width: 920px;
   margin: 0 auto;
 }
+article.psyneulink-article h1,
 article.psyneulink-article h2,
 article.psyneulink-article h3,
 article.psyneulink-article h4,
@@ -10786,7 +10787,7 @@ a:hover {
 }
 
 .psyneulink-right-menu .psyneulink-side-scroll {
-  padding-top: var(--header-spacing);
+  margin-top: var(--header-spacing);
 }
 @media screen and (min-width: 1101px) {
   .psyneulink-right-menu .psyneulink-side-scroll {
