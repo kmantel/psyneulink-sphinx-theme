@@ -788,27 +788,25 @@ function ThemeNav () {
         $(div.querySelector('input')).change(devMode_toggle);
         document.querySelector('.psyneulink-dev-mode-toggle').appendChild(div.firstChild);
 
+        function _create_adjusted_anchor_elem(source_elem, offset=0) {
+          var new_element = document.createElement('div');
+          $(new_element).addClass('hash_adjust');
+          $(new_element).attr('id', $(source_elem).attr('id'));
+          $(new_element).css("position", "relative");
+          $(new_element).css("top", `${offset}px`);
+          return new_element;
+        }
+
         function adjust_hashes(h, offset=0){
-            var dev_mode_link = false;
+            var dev_mode_link = $(h.querySelector('.anchorjs-link')).hasClass('dev-mode-link');
             var h_parent = h.parentNode;
-            var new_element = document.createElement('div');
-            if ($(h.querySelector('.anchorjs-link')).hasClass('dev-mode-link')){
-              dev_mode_link = true;
-            }
-            $(new_element).addClass('hash_adjust');
-            if (dev_mode_link){$(new_element).addClass('dev-mode-link');}
-            $(new_element).attr('id', $(h).attr('id'));
-            $(new_element).css("position", "relative");
-            $(new_element).css("top", `${offset}px`);
+            var new_element = _create_adjusted_anchor_elem(h, offset);
+            if (dev_mode_link) {$(new_element).addClass('dev-mode-link');}
             h_parent.insertBefore(new_element, h)
             var section_link = h.querySelector('span');
             if (section_link){
-                var new_element = document.createElement('div');
-                $(new_element).addClass('hash_adjust');
+                var new_element = _create_adjusted_anchor_elem(section_link, offset);
                 if (dev_mode_link){$(new_element).addClass('dev-mode-link');}
-                $(new_element).attr('id', $(section_link).attr('id'));
-                $(new_element).css("position", "relative");
-                $(new_element).css("top", `${offset}px`);
                 h_parent.insertBefore(new_element, h)
             }
         }
