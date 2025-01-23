@@ -320,7 +320,7 @@ window.psyneulinkAnchors = {
   }
 };
 
-},{}],9:[function(require,module,exports){
+},{}],8:[function(require,module,exports){
 window.sideMenus = {
   rightMenuIsOnScreen: function() {
     return document.getElementById("psyneulink-content-right").offsetParent !== null;
@@ -685,41 +685,6 @@ function ThemeNav () {
         $(div.querySelector('input')).change(devMode_toggle);
         document.querySelector('.psyneulink-dev-mode-toggle').appendChild(div.firstChild);
 
-        function adjust_hashes(h, offset=0){
-            var dev_mode_link = false;
-            var h_parent = h.parentNode;
-            var new_element = document.createElement('div');
-            if ($(h.querySelector('.anchorjs-link')).hasClass('dev-mode-link')){
-              dev_mode_link = true;
-            }
-            $(new_element).addClass('hash_adjust');
-            if (dev_mode_link){$(new_element).addClass('dev-mode-link');}
-            $(new_element).attr('id', $(h).attr('id'));
-            $(new_element).css("position", "relative");
-            $(new_element).css("top", `${offset}px`);
-            h_parent.insertBefore(new_element, h)
-            var section_link = h.querySelector('span');
-            if (section_link){
-                var new_element = document.createElement('div');
-                $(new_element).addClass('hash_adjust');
-                if (dev_mode_link){$(new_element).addClass('dev-mode-link');}
-                $(new_element).attr('id', $(section_link).attr('id'));
-                $(new_element).css("position", "relative");
-                $(new_element).css("top", `${offset}px`);
-                h_parent.insertBefore(new_element, h)
-            }
-        }
-
-        document.querySelectorAll('.psyneulink-container dt').forEach(
-            (h) => {
-                adjust_hashes(h, -(utilities.headersHeight() + utilities.OFFSET_HEIGHT_PADDING))
-            });
-
-        document.querySelectorAll('.psyneulink-container .section').forEach(
-            (h) => {
-                adjust_hashes(h, -(utilities.headersHeight()))
-            });
-
         // Set up javascript UX bits
         $(document)
             // Shift nav in mobile when clicking the menu.
@@ -945,4 +910,4 @@ if (downloadNote.length >= 1) {
     $(".psyneulink-call-to-action-links").hide();
 }
 
-},{"jquery":"jquery"}]},{},[1,2,3,4,5,6,7,8,9,"psyneulink-sphinx-theme"]);
+},{"jquery":"jquery"}]},{},[1,2,3,4,5,6,7,8,"psyneulink-sphinx-theme"]);
