@@ -96,7 +96,12 @@ window.utilities = {
     return window.innerHeight ||
            document.documentElement.clientHeight ||
            document.body.clientHeight;
-  }
+  },
+
+  pxToRem: function(px) {
+    px = parseFloat(px);
+    return px / parseFloat(getComputedStyle(document.documentElement).fontSize);
+  },
 }
 
 },{}],2:[function(require,module,exports){
@@ -793,13 +798,21 @@ function ThemeNav () {
           $(new_element).addClass('hash_adjust');
           $(new_element).attr('id', $(source_elem).attr('id'));
           $(new_element).css("position", "relative");
-          $(new_element).css("top", `${offset}px`);
+          offset = utilities.pxToRem(offset);
+          $(new_element).css("top", `${offset}rem`);
           return new_element;
         }
 
         function adjust_hashes(h, offset=0){
             var dev_mode_link = $(h.querySelector('.anchorjs-link')).hasClass('dev-mode-link');
             var h_parent = h.parentNode;
+
+            // also offset by margin of header
+            header = h.querySelector('h1, h2, h3, h4, h5, h6');
+            if (header) {
+              offset -= parseFloat(getComputedStyle(header)['margin-top']);
+            }
+
             var new_element = _create_adjusted_anchor_elem(h, offset);
             if (dev_mode_link) {$(new_element).addClass('dev-mode-link');}
             h_parent.insertBefore(new_element, h)
