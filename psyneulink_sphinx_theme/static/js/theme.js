@@ -900,8 +900,10 @@ function ThemeNav () {
                 let utilities = window.utilities;
                 let href = section.getAttribute('href')
                 let span = document.querySelector(`span${href}`)
-                span.style.display = 'block';
-                span.style.position = 'relative';
+                if (span) {
+                  span.style.display = 'block';
+                  span.style.position = 'relative';
+                }
             }
         )
 
