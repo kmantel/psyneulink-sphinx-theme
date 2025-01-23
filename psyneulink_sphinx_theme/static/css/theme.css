@@ -11259,5 +11259,5 @@ input:checked + .slider:before {
 }
 
 #psyneulink-side-scroll-right {
-  overflow: hidden;
+  overflow: auto;
 }
