@@ -10941,7 +10941,8 @@ a:hover {
 .psyneulink-container .reference,
 article.psyneulink-article ul,
 article.psyneulink-article ul li,
-article.psyneulink-article ul p {
+article.psyneulink-article ul p
+{
   scroll-margin-top: var(--header-spacing);
 }
 

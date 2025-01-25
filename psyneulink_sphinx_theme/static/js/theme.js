@@ -420,6 +420,10 @@ window.scrollToAnchor = {
         else if (elem.tagName.toLowerCase() === 'span'){
           elem = elem.parentNode
         }
+        // should do an upward search for <a>? or will that cause false matches?
+        if (elem.tagName.toLowerCase() === 'code') {
+          elem = elem.parentNode;
+        }
         if(this.scrollIfAnchor(elem.getAttribute('href'), true)) {
           e.preventDefault();
         }
