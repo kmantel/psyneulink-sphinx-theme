@@ -336,13 +336,12 @@ window.scrollToAnchor = {
       ANCHOR_REGEX: /^#[^ ]+$/,
       offsetHeightPx: function(elem) {
         var offset = $(elem).offset().top;
-        // proxy for --header-spacing root var
-        var extraSpacing = parseFloat(
-          $('.psyneulink-right-menu .psyneulink-side-scroll').css('margin-top')
-        );
+        var extraSpacing = $(elem).css('scroll-margin-top');
 
         offset -= utilities.headersHeight();
-        // offset += extraSpacing;
+        if (extraSpacing !== undefined) {
+          offset -= parseFloat(extraSpacing);
+        }
         return offset;
       },
 
