@@ -10951,11 +10951,17 @@ article.psyneulink-article ul p {
   scroll-margin-top: calc(var(--header-spacing) + var(--height-page-level-bar));
 }
 
+:root {
+  --section-span-top-offset: calc(-1 * var(--header-spacing));
+  @-moz-document url-prefix() {
+    --section-span-top-offset: 0;
+  }
+}
+
 .psyneulink-container section > span {
   position: relative;
   top: -1rem;
-  top: calc(-1 * var(--header-spacing));
-  -moz-top: 0;
+  top: var(--section-span-top-offset);
 }
 
 .cookie-banner-wrapper {
