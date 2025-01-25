@@ -321,6 +321,117 @@ window.psyneulinkAnchors = {
 };
 
 },{}],8:[function(require,module,exports){
+// Modified from https://stackoverflow.com/a/13067009
+// Going for a JS solution to scrolling to an anchor so we can benefit from
+// less hacky css and smooth scrolling.
+
+window.scrollToAnchor = {
+  bind: function() {
+    var document = window.document;
+    var history = window.history;
+    var location = window.location
+    var HISTORY_SUPPORT = !!(history && history.pushState);
+
+    var anchorScrolls = {
+      ANCHOR_REGEX: /^#[^ ]+$/,
+      offsetHeightPx: function(elem) {
+        var offset = $(elem).offset().top;
+        // proxy for --header-spacing root var
+        var extraSpacing = parseFloat(
+          $('.psyneulink-right-menu .psyneulink-side-scroll').css('margin-top')
+        );
+
+        offset -= utilities.headersHeight();
+        // offset += extraSpacing;
+        return offset;
+      },
+
+      /**
+       * Establish events, and fix initial scroll position if a hash is provided.
+       */
+      init: function() {
+        this.scrollToCurrent();
+        // This interferes with clicks below it, causing a double fire
+        // $(window).on('hashchange', $.proxy(this, 'scrollToCurrent'));
+        $('body').on('click', 'a', $.proxy(this, 'delegateAnchors'));
+        $('body').on('click', '#psyneulink-right-menu li span', $.proxy(this, 'delegateSpans'));
+      },
+
+      /**
+       * Return the offset amount to deduct from the normal scroll position.
+       * Modify as appropriate to allow for dynamic calculations
+       */
+      getFixedOffset: function() {
+        return this.offsetHeightPx();
+      },
+
+      /**
+       * If the provided href is an anchor which resolves to an element on the
+       * page, scroll to it.
+       * @param  {String} href
+       * @return {Boolean} - Was the href an anchor.
+       */
+      scrollIfAnchor: function(href, pushToHistory) {
+        var match, anchorOffset;
+        if(!this.ANCHOR_REGEX.test(href)) {
+          return false;
+        }
+
+        match = document.getElementById(href.slice(1));
+        if(match) {
+          if ($(match).hasClass('dev-mode-link')){
+            $(document.querySelector('.switch-ctrl input')).prop('checked', true).trigger('change')
+          };
+          $('html, body').scrollTop(this.offsetHeightPx(match));
+          $('html, body').trigger('scroll');
+          // Add the state to history as-per normal anchor links
+          if(HISTORY_SUPPORT && pushToHistory) {
+            history.pushState({}, document.title, location.pathname + href);
+          }
+        }
+
+        return !!match;
+      },
+
+      /**
+       * Attempt to scroll to the current location's hash.
+       */
+      scrollToCurrent: function(e) {
+        if(this.scrollIfAnchor(window.location.hash) && e) {
+          e.preventDefault();
+        }
+      },
+
+      delegateSpans: function(e) {
+        var elem = utilities.closest(e.target, "a");
+
+        if(this.scrollIfAnchor(elem.getAttribute('href'), true)) {
+          e.preventDefault();
+        }
+      },
+
+      /**
+       * If the click event's target was an anchor, fix the scroll position.
+       */
+      delegateAnchors: function(e) {
+        var elem = e.target;
+        if (elem.tagName.toLowerCase() === 'em'){
+          elem = elem.offsetParent
+        }
+        else if (elem.tagName.toLowerCase() === 'span'){
+          elem = elem.parentNode
+        }
+        if(this.scrollIfAnchor(elem.getAttribute('href'), true)) {
+          e.preventDefault();
+        }
+      }
+    };
+
+    $(document).ready($.proxy(anchorScrolls, 'init'));
+  }
+};
+
+},{}],9:[function(require,module,exports){
 window.sideMenus = {
   rightMenuIsOnScreen: function() {
     return document.getElementById("psyneulink-content-right").offsetParent !== null;
@@ -910,4 +1021,4 @@ if (downloadNote.length >= 1) {
     $(".psyneulink-call-to-action-links").hide();
 }
 
-},{"jquery":"jquery"}]},{},[1,2,3,4,5,6,7,8,"psyneulink-sphinx-theme"]);
+},{"jquery":"jquery"}]},{},[1,2,3,4,5,6,7,8,9,"psyneulink-sphinx-theme"]);
