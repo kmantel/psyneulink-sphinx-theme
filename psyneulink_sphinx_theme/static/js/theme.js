@@ -741,6 +741,34 @@ function ThemeNav () {
                 i.textContent = 'Arguments:'
             }
         })
+
+        // Adjust spans for each section in TOC for scrolling that's consistent with side menu
+
+        var tocSections = document.querySelectorAll('#psyneulink-article #contents a.reference.internal')
+
+        tocSections.forEach(
+            (section) => {
+                let utilities = window.utilities;
+                let href = section.getAttribute('href')
+                let span = document.querySelector(`span${href}`)
+                if (span) {
+                  span.style.display = 'block';
+                  span.style.position = 'relative';
+                }
+            }
+        )
+
+        var nonTocNavSections = document.querySelectorAll('.psyneulink-article .section')
+
+        nonTocNavSections.forEach(
+            (section) => {
+                let span = section.querySelector('span')
+                if (span && span.textContent === ''){
+                    span.style.display = 'block';
+                    span.style.position = 'relative';
+                }
+            }
+        );
     };
 
     nav.reset = function () {
